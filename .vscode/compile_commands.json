@@ -1,0 +1,6 @@
+[
+{
+  "directory": "/home/mrdeun/Workspace/mood",
+  "arguments": ["/usr/bin/g++", "-c", "-m64", "-g", "-O0", "-Isrc/include", "-isystem", "/home/mrdeun/.xmake/packages/c/cli11/v2.6.2/915caeea8fa8455594aa91be5822da90/include", "-o", "build/.objs/mood/linux/x86_64/debug/src/main.cpp.o", "src/main.cpp"],
+  "file": "src/main.cpp"
+}]
