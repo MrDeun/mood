@@ -1,11 +1,10 @@
 add_rules("mode.debug", "mode.release")
 
-add_requires("cli11 2.6.2","fmt")
-
+add_requires("fmt")
 target("mood")
     set_kind("binary")
     add_includedirs("src/include")
-    add_packages("cli11","fmt")
+    add_packages("fmt")
     add_files("src/lib/*.cpp")
     add_files("src/*.cpp")
 
