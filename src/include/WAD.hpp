@@ -1,8 +1,12 @@
 #pragma once
 #include <array>
 #include <cstdint>
+#include <filesystem>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <fmt/core.h>
+#include "../vendors/nlohmann_json/json.hpp"
 namespace WAD {
 
 struct Header {
@@ -12,7 +16,7 @@ struct Header {
   int32_t lumps_count;
   int32_t directory_offset;
 
-    [[nodiscard]] std::string iden_to_string() const {
+  [[nodiscard]] std::string iden_to_string() const {
     size_t len = 0;
     while (len < identity.size() && identity[len] != '\0')
       ++len;
@@ -40,13 +44,25 @@ struct Lump_Header {
 struct Lump {
   Lump_Header header;
   std::vector<uint8_t> data;
-
-  void populate_data(const std::vector<uint8_t>& wad_data);
-
+  void populate_data(const std::vector<uint8_t> &wad_data);
 };
 [[nodiscard]] std::vector<WAD::Lump_Header>
 read_all_lumps(const std::vector<uint8_t> &wad_data, const WAD::Header &header);
 
-[[nodiscard]] std::vector<WAD::Lump> convert_headers_to_full(const std::vector<uint8_t>& , std::vector<WAD::Lump_Header>&& );
+[[nodiscard]] std::vector<WAD::Lump>
+convert_headers_to_full(const std::vector<uint8_t> &,
+                        const std::vector<WAD::Lump_Header> &);
+
+struct WADFile {
+  WADFile() = delete;
+  std::vector<Lump> _lumps{};
+  Header _header{};
+
+  WADFile(const std::filesystem::path &path);
+
+  [[nodiscard]] nlohmann::json to_json() const;
+};
+
+
 
 }; // namespace WAD
