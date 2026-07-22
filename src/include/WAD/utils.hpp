@@ -15,4 +15,4 @@ read_all_lumps(const std::vector<uint8_t> &wad_data, const Header &header);
 convert_headers_to_full(const std::vector<uint8_t> &,
                         const std::vector<Lump_Header> &);
 
-}
+} // namespace WAD

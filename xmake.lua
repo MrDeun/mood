@@ -1,10 +1,10 @@
 add_rules("mode.debug", "mode.release")
 add_languages("c++17")
-add_requires("fmt")
+add_requires("fmt", "sfml")
 target("mood")
     set_kind("binary")
     add_includedirs("src/include")
-    add_packages("fmt")
+    add_packages("fmt", "sfml")
     add_files("src/lib/*.cpp")
     add_files("src/*.cpp")
 

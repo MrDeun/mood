@@ -21,4 +21,4 @@ struct Lump_Header {
   }
 };
 
-}
+} // namespace WAD

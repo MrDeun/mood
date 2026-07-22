@@ -12,4 +12,4 @@ struct Lump {
   void populate_data(const std::vector<uint8_t> &wad_data);
 };
 
-}
+} // namespace WAD

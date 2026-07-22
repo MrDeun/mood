@@ -19,4 +19,4 @@ Header Header::parse(const std::vector<uint8_t> &data) {
 
   return header;
 }
-}
+} // namespace WAD

@@ -23,4 +23,4 @@ struct Header {
   static Header parse(const std::vector<uint8_t> &data);
 };
 
-}
+} // namespace WAD
