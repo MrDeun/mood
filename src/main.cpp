@@ -34,9 +34,8 @@ int main(int argc, char **argv) {
     fmt::println("Error: Path to a valid WAD file must be assigned!");
     return -1;
   }
-  
-  auto wad = WAD::WADFile(globals.wad_path);
-  auto j = wad.to_json();
-  fmt::println("{}",j.dump());
+
+  auto wad_json = WAD::WADFile(globals.wad_path).to_json();
+  fmt::println("{}",wad_json.dump());
   return 0;
 }
