@@ -1,5 +1,5 @@
 add_rules("mode.debug", "mode.release")
-
+add_languages("c++17")
 add_requires("fmt")
 target("mood")
     set_kind("binary")
