@@ -1,23 +1,8 @@
-#include "SFML/Graphics/Color.hpp"
-#include "SFML/System/Vector2.hpp"
-#include "SFML/System/Vector3.hpp"
-#include "SFML/Window/Event.hpp"
-#include "WAD.hpp"
-#include "fmt/base.h"
-#include <SFML/Graphics.hpp>
-#include <SFML/Main.hpp>
-#include <SFML/Window.hpp>
-#include <algorithm>
-#include <array>
-#include <cassert>
-#include <cstddef>
-#include <filesystem>
-#include <fmt/core.h>
-#include <fmt/ranges.h>
-#include <fstream>
-#include <ios>
-#include <iterator>
 
+#include "SFML/Graphics/RectangleShape.hpp"
+#include "SFML/Graphics/RenderWindow.hpp"
+#include "WAD/WADFile.hpp"
+#include "fmt/core.h"
 #include "vendors/CLI/CLI11.hpp"
 
 namespace fs = std::filesystem;
@@ -52,8 +37,8 @@ int main(int argc, char **argv) {
 
   sf::RectangleShape rec{{100, 100}};
   rec.setOutlineColor(sf::Color::Black);
-  rec.setOutlineThickness(0.5f);
-  sf::RenderWindow window(sf::VideoMode({50 * 16, 50 * 16}),
+  rec.setOutlineThickness(2.f);
+  sf::RenderWindow window(sf::VideoMode({32 * 16, 32 * 16}),
                           "Pallete from WAD file");
 
   while (window.isOpen()) {
@@ -67,7 +52,7 @@ int main(int argc, char **argv) {
     for (size_t y = 0; y < 16; y++) {
       for (size_t x = 0; x < 16; x++) {
         const auto color = pallete.at(x + y * 16);
-        rec.setPosition({50.f * x, 50.f * y});
+        rec.setPosition({32.f * x, 32.f * y});
         rec.setFillColor(color);
         window.draw(rec);
       }

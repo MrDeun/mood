@@ -8,14 +8,14 @@
 #include "Lump.hpp"
 
 namespace WAD {
-
+using LumpMap = std::unordered_map<std::string, std::vector<uint8_t>>;
 struct WADFile {
   WADFile() = delete;
   std::vector<Lump> lumps{};
   Header header{};
 
   WADFile(const std::filesystem::path &path);
-  [[nodiscard]] std::unordered_map<std::string, std::vector<uint8_t>> to_map() const;
+  [[nodiscard]] LumpMap to_map() const;
   [[nodiscard]] nlohmann::json to_json() const;
 };
 
