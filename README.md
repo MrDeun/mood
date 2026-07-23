@@ -25,7 +25,18 @@ xmake
 ## Usage
 
 ```bash
-xmake run mood -f <path-to-WAD>
+./build/<os>/<arch>/<build_type>/mood -h
+
+Mood - Doom source port for the funnies
+
+
+./mood [OPTIONS]
+
+
+OPTIONS:
+  -h,     --help              Print this help message and exit
+  -f,     --file TEXT         Assign wad file to load
+
 ```
 
 ## Project structure
@@ -55,6 +66,7 @@ xmake run mood -f <path-to-WAD>
 ## Roadmap (likely)
 
 - [x] WAD parsing
+- [ ] Create method for collecting all WAD's maps 
 - [x] Palette extraction and rendering
 - [ ] Map/level loading
 - [ ] Full rendering (software or GPU)

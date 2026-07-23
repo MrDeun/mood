@@ -6,6 +6,7 @@
 #include "SFML/Window/Keyboard.hpp"
 #include "WAD.hpp"
 #include "WAD/WADFile.hpp"
+#include "fmt/base.h"
 #include "fmt/core.h"
 #include "vendors/CLI/CLI11.hpp"
 
@@ -30,18 +31,25 @@ int main(int argc, char **argv) {
     fmt::println("Error: Path to a valid WAD file must be assigned!");
     return -1;
   }
-  const auto wad_map = WAD::WADFile(globals.wad_path).to_map();
-  const auto &pallete_data = wad_map.at("PLAYPAL");
-  const auto palletes = std::get<WAD::Palletes>(WAD::extract_pallets(wad_map));
+  const auto wad = WAD::WADFile(globals.wad_path);
+  fmt::println("{}", wad.to_json().dump());
+  const auto wad_map = wad.to_map();
+  const auto palletes = WAD::extract_pallets(wad_map).value();
+
   sf::RectangleShape rec{{100, 100}};
-  sf::RectangleShape background({300, 50});
-  background.setFillColor({0,0,0,128});
   rec.setOutlineColor(sf::Color::Black);
   rec.setOutlineThickness(2.f);
+
+  sf::RectangleShape background({300, 50});
+  background.setFillColor({0, 0, 0, 128});
+
   sf::RenderWindow window(sf::VideoMode({75 * 16, 75 * 16}),
                           "Pallete from WAD file");
+  window.setFramerateLimit(60);
+
   sf::Text text(globals.font);
   text.setPosition({10, 10});
+
   int current_pallete_index = 0;
   while (window.isOpen()) {
     while (const auto event = window.pollEvent()) {

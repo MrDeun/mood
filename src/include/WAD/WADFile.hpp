@@ -15,7 +15,7 @@ struct WADFile {
   Header header{};
 
   WADFile(const std::filesystem::path &path);
-  [[nodiscard]] LumpMap to_map() const;
+  [[nodiscard]] LumpMap to_map() const; // CAUTION! Possible lost of map data!
   [[nodiscard]] nlohmann::json to_json() const;
 };
 

@@ -23,13 +23,14 @@ WADFile::WADFile(const std::filesystem::path &path) {
   lumps = convert_headers_to_full(buffer, lump_headers);
 }
 
- std::unordered_map<std::string, std::vector<uint8_t>> WADFile::to_map() const {
-  std::unordered_map<std::string, std::vector<uint8_t>> map;
-  for(const auto& l : lumps){
-    map.emplace(l.header.name_to_string(),l.data);
+LumpMap WADFile::to_map() const {
+  // CAUTION! Possible lost of map data!
+  LumpMap map;
+  for (const auto &l : lumps) {
+    map.emplace(l.header.name_to_string(), l.data);
   }
   return map;
- }
+}
 
 nlohmann::json WADFile::to_json() const {
   nlohmann::json j;
